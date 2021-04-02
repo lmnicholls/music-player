@@ -30,8 +30,13 @@ var createSongRow = function (songNumber, songName, songLength) {
   
     // 3. The currently playing song was clicked
     } else {
-      currentlyPlayingSongNumber = null;
-      $(this).html(clickedSongNumber);
+      if (currentSoundFile.isPaused()) {
+        currentSoundFile.play();
+        $(this).html(pauseButtonTemplate);
+      } else {
+        currentSoundFile.pause();
+        $(this).html(playButtonTemplate);
+      }
     }
   };
 
@@ -89,9 +94,9 @@ var setCurrentAlbum = function(album) {
 };
 
 var setSong = function (songNumber) {
-  if (currentSoundFile) {
-    currentSoundFile.stop();
-  }
+  // if (currentSoundFile) {
+  //   currentSoundFile.stop();
+  // }
 
   var songUrl = currentAlbum.songs[currentlyPlayingSongNumber - 1].audioUrl;
 

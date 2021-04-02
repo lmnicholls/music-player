@@ -94,11 +94,17 @@ var setCurrentAlbum = function(album) {
 };
 
 var setSong = function (songNumber) {
-  // if (currentSoundFile) {
-  //   currentSoundFile.stop();
-  // }
+  if (currentSoundFile) {
+    currentSoundFile.stop();
+  }
 
   var songUrl = currentAlbum.songs[currentlyPlayingSongNumber - 1].audioUrl;
+  var currentSongName = currentAlbum.songs[currentlyPlayingSongNumber - 1].title;
+  var currentSongArtist = currentAlbum.artist;
+
+  $('.song-name').html(currentSongName);
+  $('.artist-name').html(currentSongArtist);
+
 
   currentSoundFile = new buzz.sound(songUrl, {
     formats: [ 'mp3' ],
